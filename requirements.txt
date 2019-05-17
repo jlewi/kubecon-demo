@@ -1,0 +1,6 @@
+pandas
+joblib
+numpy
+xgboost
+sklearn
+seldon-core

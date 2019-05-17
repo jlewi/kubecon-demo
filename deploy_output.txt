@@ -1,0 +1,196 @@
+WARNING:fairing.ml_tasks.tasks:Using preprocessor: <class 'fairing.preprocessors.function.FunctionPreProcessor'>
+WARNING:fairing.ml_tasks.tasks:Using docker registry: gcr.io/code-search-demo/fairing-job
+INFO:root:Using ClusterBuilder
+WARNING:fairing.ml_tasks.tasks:Using builder: <class 'fairing.builders.cluster.cluster.ClusterBuilder'>
+INFO:root:Building the docker image.
+WARNING:root:/home/jovyan/git_jlewi-kubecon-demo/fairing/fairing/__init__.py already exists in Fairing context, skipping...
+INFO:root:Creating docker context: /tmp/fairing.context.tar.gz
+INFO:root:Adding files to context: {'trained_ames_model.dat', 'requirements.txt'}
+WARNING:root:/home/jovyan/git_jlewi-kubecon-demo/fairing/fairing/__init__.py already exists in Fairing context, skipping...
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding /home/jovyan/git_jlewi-kubecon-demo/fairing/fairing/__init__.py at /app/fairing/__init__.py
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding /home/jovyan/git_jlewi-kubecon-demo/fairing/fairing/runtime_config.py at /app/fairing/runtime_config.py
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding trained_ames_model.dat at /app/trained_ames_model.dat
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding requirements.txt at /app/requirements.txt
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding /home/jovyan/git_jlewi-kubecon-demo/fairing/fairing/functions/function_shim.py at /app/function_shim.py
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding /opt/conda/lib/python3.6/site-packages/cloudpickle/__init__.py at /app/cloudpickle/__init__.py
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding /opt/conda/lib/python3.6/site-packages/cloudpickle/cloudpickle.py at /app/cloudpickle/cloudpickle.py
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding /tmp/tmpppb7k99n at /app/pickled_fn.p
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding /tmp/tmpih2offwk at /app/HousingServe.py
+INFO:root:Context: /tmp/fairing.context.tar.gz, Adding /tmp/Dockerfile at Dockerfile
+WARNING:fairing.kubernetes.manager:Waiting for fairing-builder-knsrp to start...
+WARNING:fairing.kubernetes.manager:Waiting for fairing-builder-knsrp to start...
+INFO:fairing.kubernetes.manager:Pod started running True
+INFO[0000] Downloading base image python:3.6.7
+ERROR: logging before flag.Parse: E0517 01:29:25.475011       1 metadata.go:142] while reading 'google-dockercfg' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg
+ERROR: logging before flag.Parse: E0517 01:29:25.479962       1 metadata.go:159] while reading 'google-dockercfg-url' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg-url
+2019/05/17 01:29:25 No matching credentials were found, falling back on anonymous
+INFO[0000] Executing 0 build triggers
+INFO[0000] Unpacking rootfs as cmd RUN if [ -e requirements.txt ];then pip install --no-cache -r requirements.txt; fi requires it.
+INFO[0019] Taking snapshot of full filesystem...
+INFO[0028] Skipping paths under /dev, as it is a whitelisted directory
+INFO[0028] Skipping paths under /etc/secrets, as it is a whitelisted directory
+INFO[0028] Skipping paths under /kaniko, as it is a whitelisted directory
+INFO[0028] Skipping paths under /proc, as it is a whitelisted directory
+INFO[0028] Skipping paths under /sys, as it is a whitelisted directory
+INFO[0029] Skipping paths under /var/run, as it is a whitelisted directory
+INFO[0038] WORKDIR /app/
+INFO[0038] cmd: workdir
+INFO[0038] Changed working directory to /app/
+INFO[0038] Creating directory /app/
+INFO[0038] Taking snapshot of files...
+INFO[0038] ENV FAIRING_RUNTIME 1
+INFO[0038] Using files from context: [/kaniko/buildcontext/app/requirements.txt]
+INFO[0038] COPY /app//requirements.txt /app/
+INFO[0038] Taking snapshot of files...
+INFO[0038] RUN if [ -e requirements.txt ];then pip install --no-cache -r requirements.txt; fi
+INFO[0038] cmd: /bin/sh
+INFO[0038] args: [-c if [ -e requirements.txt ];then pip install --no-cache -r requirements.txt; fi]
+Collecting pandas (from -r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/19/74/e50234bc82c553fecdbd566d8650801e3fe2d6d8c8d940638e3d8a7c5522/pandas-0.24.2-cp36-cp36m-manylinux1_x86_64.whl (10.1MB)
+Collecting joblib (from -r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/cd/c1/50a758e8247561e58cb87305b1e90b171b8c767b15b12a1734001f41d356/joblib-0.13.2-py2.py3-none-any.whl (278kB)
+Collecting numpy (from -r requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/c1/e2/4db8df8f6cddc98e7d7c537245ef2f4e41a1ed17bf0c3177ab3cc6beac7f/numpy-1.16.3-cp36-cp36m-manylinux1_x86_64.whl (17.3MB)
+Collecting xgboost (from -r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/6a/49/7e10686647f741bd9c8918b0decdb94135b542fe372ca1100739b8529503/xgboost-0.82-py2.py3-none-manylinux1_x86_64.whl (114.0MB)
+Collecting sklearn (from -r requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/1e/7a/dbb3be0ce9bd5c8b7e3d87328e79063f8b263b2b1bfa4774cb1147bfcd3f/sklearn-0.0.tar.gz
+Collecting seldon-core (from -r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/31/44/51cac9c7df386fbd740ae9c24b2d28380974d137c5c1532eae0534c9bb67/seldon_core-0.2.7.1-py3-none-any.whl
+Collecting python-dateutil>=2.5.0 (from pandas->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/41/17/c62faccbfbd163c7f57f3844689e3a78bae1f403648a6afb1d0866d87fbb/python_dateutil-2.8.0-py2.py3-none-any.whl (226kB)
+Collecting pytz>=2011k (from pandas->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/3d/73/fe30c2daaaa0713420d0382b16fbb761409f532c56bdcc514bf7b6262bb6/pytz-2019.1-py2.py3-none-any.whl (510kB)
+Collecting scipy (from xgboost->-r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/7f/5f/c48860704092933bf1c4c1574a8de1ffd16bf4fde8bab190d747598844b2/scipy-1.2.1-cp36-cp36m-manylinux1_x86_64.whl (24.8MB)
+Collecting scikit-learn (from sklearn->-r requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/90/c7/401c231c445fb6fad135e92197da9c3e77983de169ff1887cc18af94498d/scikit_learn-0.21.1-cp36-cp36m-manylinux1_x86_64.whl (6.7MB)
+Collecting tensorflow (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/77/63/a9fa76de8dffe7455304c4ed635be4aa9c0bacef6e0633d87d5f54530c5c/tensorflow-1.13.1-cp36-cp36m-manylinux1_x86_64.whl (92.5MB)
+Collecting flask (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/7f/e7/08578774ed4536d3242b14dacb4696386634607af824ea997202cd0edb4b/Flask-1.0.2-py2.py3-none-any.whl (91kB)
+Collecting flask-cors (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/65/cb/683f71ff8daa3aea0a5cbb276074de39f9ab66d3fbb8ad5efb5bb83e90d2/Flask_Cors-3.0.7-py2.py3-none-any.whl
+Collecting requests (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/51/bd/23c926cd341ea6b7dd0b2a00aba99ae0f828be89d72b2190f27c11d4b7fb/requests-2.22.0-py2.py3-none-any.whl (57kB)
+Collecting protobuf (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/5a/aa/a858df367b464f5e9452e1c538aa47754d467023850c00b000287750fa77/protobuf-3.7.1-cp36-cp36m-manylinux1_x86_64.whl (1.2MB)
+Collecting jaeger-client==3.13.0 (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/c8/a2/e9bd04cd660cbdffe0598173be068be23099fbd68e7a4a89b74440509130/jaeger-client-3.13.0.tar.gz (77kB)
+Collecting pyyaml (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/9f/2c/9417b5c774792634834e730932745bc09a7d36754ca00acf1ccd1ac2594d/PyYAML-5.1.tar.gz (274kB)
+Collecting redis (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/ac/a7/cff10cc5f1180834a3ed564d148fb4329c989cbb1f2e196fc9a10fa07072/redis-3.2.1-py2.py3-none-any.whl (65kB)
+Collecting grpcio (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/0a/9d/8bd5d0e516b196f59f1c4439b424b8d4fa62d492a4b531aae322d2d82a7b/grpcio-1.20.1-cp36-cp36m-manylinux1_x86_64.whl (2.1MB)
+Collecting opentracing<2,>=1.2.2 (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/06/c2/90b35a1abdc639a5c6000d8202c70217d60e80f5b328870efb73fda71115/opentracing-1.3.0.tar.gz
+Collecting flatbuffers (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/c9/84/adf5837f96c39990bc55afdfddf460b38b4562f50341359afa32e4a98de7/flatbuffers-1.11-py2.py3-none-any.whl
+Collecting Flask-OpenTracing==0.2.0 (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/1d/c4/0546b854a3f42af9ef959df9bd1108903698e175e7a07c057cdfaeeef718/Flask_OpenTracing-0.2.0-py2.py3-none-any.whl
+Collecting grpcio-opentracing (from seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/db/82/2fcad380697c3dab25de76ee590bcab3eb9bbfb4add916044d7e83ec2b10/grpcio_opentracing-1.1.4-py3-none-any.whl
+Collecting six>=1.5 (from python-dateutil>=2.5.0->pandas->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/73/fb/00a976f728d0d1fecfe898238ce23f502a721c0ac0ecfedb80e0d88c64e9/six-1.12.0-py2.py3-none-any.whl
+Collecting termcolor>=1.1.0 (from tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/8a/48/a76be51647d0eb9f10e2a4511bf3ffb8cc1e6b14e9e4fab46173aa79f981/termcolor-1.1.0.tar.gz
+Collecting tensorflow-estimator<1.14.0rc0,>=1.13.0 (from tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/bb/48/13f49fc3fa0fdf916aa1419013bb8f2ad09674c275b4046d5ee669a46873/tensorflow_estimator-1.13.0-py2.py3-none-any.whl (367kB)
+Collecting gast>=0.2.0 (from tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/4e/35/11749bf99b2d4e3cceb4d55ca22590b0d7c2c62b9de38ac4a4a7f4687421/gast-0.2.2.tar.gz
+Collecting astor>=0.6.0 (from tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/35/6b/11530768cac581a12952a2aad00e1526b89d242d0b9f59534ef6e6a1752f/astor-0.7.1-py2.py3-none-any.whl
+Collecting keras-applications>=1.0.6 (from tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/90/85/64c82949765cfb246bbdaf5aca2d55f400f792655927a017710a78445def/Keras_Applications-1.0.7-py2.py3-none-any.whl (51kB)
+Collecting absl-py>=0.1.6 (from tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/da/3f/9b0355080b81b15ba6a9ffcf1f5ea39e307a2778b2f2dc8694724e8abd5b/absl-py-0.7.1.tar.gz (99kB)
+Requirement already satisfied: wheel>=0.26 in /usr/local/lib/python3.6/site-packages (from tensorflow->seldon-core->-r requirements.txt (line 6)) (0.32.2)
+Collecting keras-preprocessing>=1.0.5 (from tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/c0/bf/0315ef6a9fd3fc2346e85b0ff1f5f83ca17073f2c31ac719ab2e4da0d4a3/Keras_Preprocessing-1.0.9-py2.py3-none-any.whl (59kB)
+Collecting tensorboard<1.14.0,>=1.13.0 (from tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/0f/39/bdd75b08a6fba41f098b6cb091b9e8c7a80e1b4d679a581a0ccd17b10373/tensorboard-1.13.1-py3-none-any.whl (3.2MB)
+Collecting Jinja2>=2.10 (from flask->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/1d/e7/fd8b501e7a6dfe492a433deb7b9d833d39ca74916fa8bc63dd1a4947a671/Jinja2-2.10.1-py2.py3-none-any.whl (124kB)
+Collecting Werkzeug>=0.14 (from flask->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/9f/57/92a497e38161ce40606c27a86759c6b92dd34fcdb33f64171ec559257c02/Werkzeug-0.15.4-py2.py3-none-any.whl (327kB)
+Collecting click>=5.1 (from flask->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/fa/37/45185cb5abbc30d7257104c434fe0b07e5a195a6847506c074527aa599ec/Click-7.0-py2.py3-none-any.whl (81kB)
+Collecting itsdangerous>=0.24 (from flask->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/76/ae/44b03b253d6fade317f32c24d100b3b35c2239807046a4c953c7b89fa49e/itsdangerous-1.1.0-py2.py3-none-any.whl
+Collecting certifi>=2017.4.17 (from requests->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/60/75/f692a584e85b7eaba0e03827b3d51f45f571c2e793dd731e598828d380aa/certifi-2019.3.9-py2.py3-none-any.whl (158kB)
+Collecting idna<2.9,>=2.5 (from requests->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/14/2c/cd551d81dbe15200be1cf41cd03869a46fe7226e7450af7a6545bfc474c9/idna-2.8-py2.py3-none-any.whl (58kB)
+Collecting urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 (from requests->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/39/ec/d93dfc69617a028915df914339ef66936ea976ef24fa62940fd86ba0326e/urllib3-1.25.2-py2.py3-none-any.whl (150kB)
+Collecting chardet<3.1.0,>=3.0.2 (from requests->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl (133kB)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.6/site-packages (from protobuf->seldon-core->-r requirements.txt (line 6)) (40.6.2)
+Collecting threadloop<2,>=1 (from jaeger-client==3.13.0->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/d3/1d/8398c1645b97dc008d3c658e04beda01ede3d90943d40c8d56863cf891bd/threadloop-1.0.2.tar.gz
+Collecting thrift (from jaeger-client==3.13.0->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/c6/b4/510617906f8e0c5660e7d96fbc5585113f83ad547a3989b80297ac72a74c/thrift-0.11.0.tar.gz (52kB)
+Collecting tornado<5,>=4.3 (from jaeger-client==3.13.0->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/e3/7b/e29ab3d51c8df66922fea216e2bddfcb6430fb29620e5165b16a216e0d3c/tornado-4.5.3.tar.gz (484kB)
+Collecting mock>=2.0.0 (from tensorflow-estimator<1.14.0rc0,>=1.13.0->tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/05/d2/f94e68be6b17f46d2c353564da56e6fb89ef09faeeff3313a046cb810ca9/mock-3.0.5-py2.py3-none-any.whl
+Collecting h5py (from keras-applications>=1.0.6->tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/30/99/d7d4fbf2d02bb30fb76179911a250074b55b852d34e98dd452a9f394ac06/h5py-2.9.0-cp36-cp36m-manylinux1_x86_64.whl (2.8MB)
+Collecting markdown>=2.6.8 (from tensorboard<1.14.0,>=1.13.0->tensorflow->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/f5/e4/d8c18f2555add57ff21bf25af36d827145896a07607486cc79a2aea641af/Markdown-3.1-py2.py3-none-any.whl (87kB)
+Collecting MarkupSafe>=0.23 (from Jinja2>=2.10->flask->seldon-core->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/b2/5f/23e0023be6bb885d00ffbefad2942bc51a620328ee910f64abe5a8d18dd1/MarkupSafe-1.1.1-cp36-cp36m-manylinux1_x86_64.whl
+Installing collected packages: six, python-dateutil, numpy, pytz, pandas, joblib, scipy, xgboost, scikit-learn, sklearn, termcolor, mock, absl-py, tensorflow-estimator, protobuf, gast, astor, h5py, keras-applications, grpcio, keras-preprocessing, Werkzeug, markdown, tensorboard, tensorflow, MarkupSafe, Jinja2, click, itsdangerous, flask, flask-cors, certifi, idna, urllib3, chardet, requests, tornado, threadloop, thrift, opentracing, jaeger-client, pyyaml, redis, flatbuffers, Flask-OpenTracing, grpcio-opentracing, seldon-core
+  Running setup.py install for sklearn: started
+    Running setup.py install for sklearn: finished with status 'done'
+  Running setup.py install for termcolor: started
+    Running setup.py install for termcolor: finished with status 'done'
+  Running setup.py install for absl-py: started
+    Running setup.py install for absl-py: finished with status 'done'
+  Running setup.py install for gast: started
+    Running setup.py install for gast: finished with status 'done'
+  Running setup.py install for tornado: started
+    Running setup.py install for tornado: finished with status 'done'
+  Running setup.py install for threadloop: started
+    Running setup.py install for threadloop: finished with status 'done'
+  Running setup.py install for thrift: started
+    Running setup.py install for thrift: finished with status 'done'
+  Running setup.py install for opentracing: started
+    Running setup.py install for opentracing: finished with status 'done'
+  Running setup.py install for jaeger-client: started
+    Running setup.py install for jaeger-client: finished with status 'done'
+  Running setup.py install for pyyaml: started
+    Running setup.py install for pyyaml: finished with status 'done'
+Successfully installed Flask-OpenTracing-0.2.0 Jinja2-2.10.1 MarkupSafe-1.1.1 Werkzeug-0.15.4 absl-py-0.7.1 astor-0.7.1 certifi-2019.3.9 chardet-3.0.4 click-7.0 flask-1.0.2 flask-cors-3.0.7 flatbuffers-1.11 gast-0.2.2 grpcio-1.20.1 grpcio-opentracing-1.1.4 h5py-2.9.0 idna-2.8 itsdangerous-1.1.0 jaeger-client-3.13.0 joblib-0.13.2 keras-applications-1.0.7 keras-preprocessing-1.0.9 markdown-3.1 mock-3.0.5 numpy-1.16.3 opentracing-1.3.0 pandas-0.24.2 protobuf-3.7.1 python-dateutil-2.8.0 pytz-2019.1 pyyaml-5.1 redis-3.2.1 requests-2.22.0 scikit-learn-0.21.1 scipy-1.2.1 seldon-core-0.2.7.1 six-1.12.0 sklearn-0.0 tensorboard-1.13.1 tensorflow-1.13.1 tensorflow-estimator-1.13.0 termcolor-1.1.0 threadloop-1.0.2 thrift-0.11.0 tornado-4.5.3 urllib3-1.25.2 xgboost-0.82
+You are using pip version 18.1, however version 19.1.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+INFO[0102] Taking snapshot of full filesystem...
+INFO[0103] Skipping paths under /dev, as it is a whitelisted directory
+INFO[0103] Skipping paths under /etc/secrets, as it is a whitelisted directory
+INFO[0103] Skipping paths under /kaniko, as it is a whitelisted directory
+INFO[0103] Skipping paths under /proc, as it is a whitelisted directory
+INFO[0103] Skipping paths under /sys, as it is a whitelisted directory
+INFO[0104] Skipping paths under /var/run, as it is a whitelisted directory
+INFO[0137] Using files from context: [/kaniko/buildcontext/app]
+INFO[0137] COPY /app/ /app/
+INFO[0138] Taking snapshot of files...
+2019/05/17 01:31:43 existing blob: sha256:687ed2fb2a0d7da5503478759fd00c23970b65d02b317119b3fb9025038a2594
+2019/05/17 01:31:43 existing blob: sha256:0c1db95989906f161007d8ef2a6ef6e0ec64bc15bf2c993fd002edbdfc7aa7df
+2019/05/17 01:31:43 existing blob: sha256:a8c5303780550b746a4781e5e4cd893121d8019e971414a2a1273d54486b4eb9
+2019/05/17 01:31:43 existing blob: sha256:5d71636fb824265e30ff34bf20737c9cdc4f5af28b6bce86f08215c55b89bfab
+2019/05/17 01:31:43 existing blob: sha256:d6341e30912f12f56e18564a3b582853f65376766f5f9d641a68a724ed6db88f
+2019/05/17 01:31:43 existing blob: sha256:620aea26e85367b08cdf1f6768491fb44df6a2a71f7d663f835b1692e849c3ee
+2019/05/17 01:31:43 existing blob: sha256:087a57faf9491b1b82a83e26bc8cc90c90c30e4a4d858b57ddd5b4c2c90095f6
+2019/05/17 01:31:43 existing blob: sha256:2eeb5ce9b9240a928b0a799f9f2601027e2c6b7525394ae5c371f124058489d7
+2019/05/17 01:31:43 existing blob: sha256:54f7e8ac135a5f502a6ee9537ef3d64b1cd2fa570dc0a40b4d3b6f7ac81e7486
+2019/05/17 01:31:44 pushed blob sha256:26a37378d28f500d839feb76614c96b9d1ea7912e31a3c8d6c4312531af5aaca
+2019/05/17 01:31:45 pushed blob sha256:ef98a909bfb34df036edead47cf25d38dc82acb86221679650d37740e15f7ca9
+2019/05/17 01:31:45 pushed blob sha256:18f6c6750eeaf64863a663cfddb3e90e380cd5b21b57039ad166fc081498ae95
+2019/05/17 01:31:45 pushed blob sha256:75dc8788653ea0a5fdc18c7de39953d516a15ce1dc720e4d3a3b82492d07edeb
+2019/05/17 01:32:27 pushed blob sha256:bb7bf3474200cabb676bb4df5e0f8a20c4bbdc46e3821f7c8a9f090e73c208d9
+2019/05/17 01:32:28 gcr.io/code-search-demo/fairing-job/fairing-job:21A35F1E: digest: sha256:8aca44766b98e383a04bb7af9d2a274455a4c2758c50302717ce965b4727edcd size: 2390
+INFO:root:Deploying the endpoint.
+WARNING:fairing.deployers.serving.serving:Deployment fairing-deployer-gqpq8 launched.
+WARNING:fairing.deployers.serving.serving:In cluster Endpoint http://fairing-service-p7zjs.kubeflow.svc.cluster.local launched.
+WARNING:fairing.ml_tasks.tasks:Prediction endpoint: http://fairing-service-p7zjs.kubeflow.svc.cluster.local
