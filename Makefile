@@ -29,7 +29,7 @@ all: build
 # To build without the cache set the environment variable
 # export DOCKER_BUILD_OPTS=--no-cache
 .PHONY: build
-build-dir: ./Dockerfile ./requirements.txt update_model.py Dockerfile.gitops
+build-dir: ./Dockerfile ./requirements.txt update_model.py
 	rm -rf ./.build
 	mkdir  -p ./.build
 	cp ./requirements.txt ./.build/
@@ -42,14 +42,6 @@ build: build-dir
 	docker tag $(IMG):$(TAG) $(IMG):latest
 	@echo Built $(IMG):latest
 	@echo Built $(IMG):$(TAG)
-
-build-gitops: build-dir
-	cd .build && docker build ${DOCKER_BUILD_OPTS} -t $(GITOPS_IMAGE):$(TAG) -f Dockerfile.gitops . \
-           --label=git-verions=$(GIT_VERSION)
-	docker tag $(GITOPS_IMAGE):$(TAG) $(IMG):latest
-	@echo Built $(GITOPS_IMAGE):latest
-	@echo Built $(GITOPS_IMAGE):$(TAG)
-
 
 build-gcb: build-dir	
 	gcloud builds submit --machine-type=n1-highcpu-32 --project=$(PROJECT) --tag=$(IMG):$(TAG) \
