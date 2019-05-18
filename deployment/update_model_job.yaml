@@ -1,0 +1,46 @@
+# Run a job to create a PR updating the model
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: model-updater
+  generateName: model-updater-
+spec:
+  template:
+    spec:
+      containers:
+      - command:
+        - python3 
+        - update_model.py
+        - all
+        - --model-file=gs://test/new/model
+        - --src-dir=/src
+        - --remote-fork=git@github.com:kubeflow-bot/kubecon-demo.git
+        - --add-github-host=true
+        image: gcr.io/code-search-demo/kubecon-demo/notebook:latest
+        name: update
+        workingDir: /src/jlewi/kubecon-demo
+        env:
+        - name: GIT_AUTHOR_NAME
+          value: kubeflow-bot
+        - name: GIT_AUTHOR_EMAIL
+          value: ci-bot-owners@kubeflow.org
+        - name: PYTHONPATH
+          value: /src/kubeflow/testing/py
+        - name: SSH_DIR
+          value: /secret/ssh
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: github-token
+              key: github_token
+        volumeMounts:
+        - mountPath: /secret/ssh
+          name: ssh
+          readOnly: true
+      restartPolicy: Never
+      volumes:
+      # ssh key to push to github.com/kubeflow-bot
+      - name: ssh
+        secret:
+          secretName: ssh-key

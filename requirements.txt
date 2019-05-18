@@ -1,4 +1,5 @@
 fire
+gitpython
 google-cloud-storage
 pandas
 joblib
