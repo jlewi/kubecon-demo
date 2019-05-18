@@ -8,6 +8,7 @@ import numpy as np
 from pathlib import Path
 import re
 import requests
+from retrying import retry
 
 class FilterIncludeCell(NbPreProcessor):
     """Notebook preprocessor that only includes cells that have a comment fairing:include-cell"""
@@ -108,6 +109,8 @@ def add_pvc_mutator(pvc_name, mount_path):
 
     return add_pvc
 
+@retry(wait_exponential_multiplier=1000, wait_exponential_max=5000,
+       stop_max_delay=2*60*1000)
 def predict_nparray(url, data, feature_names=None):
     pdata={
         "data": {
@@ -119,5 +122,5 @@ def predict_nparray(url, data, feature_names=None):
         }
     }
     serialized_data = json.dumps(pdata)
-    r = requests.post(url, data={'json':serialized_data})
+    r = requests.post(url, data={'json':serialized_data}, timeout=5)
     return r

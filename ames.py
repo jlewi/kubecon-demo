@@ -87,12 +87,11 @@ def save_model(model, model_file):
         
     
 def split_gcs_uri(gcs_uri):
-        """Split a GCS URI into bucket and path."""
-        GCS_REGEX = re.compile("gs://([^/]*)(/.*)?")
-        m = GCS_REGEX.match(gcs_uri)
-        bucket = m.group(1)
-        path = ""
-        if m.group(2):
-            path = m.group(2).lstrip("/")
-        return bucket, path
-        
+    """Split a GCS URI into bucket and path."""
+    GCS_REGEX = re.compile("gs://([^/]*)(/.*)?")
+    m = GCS_REGEX.match(gcs_uri)
+    bucket = m.group(1)
+    path = ""
+    if m.group(2):
+        path = m.group(2).lstrip("/")
+    return bucket, path

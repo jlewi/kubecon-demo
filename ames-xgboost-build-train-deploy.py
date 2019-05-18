@@ -22,20 +22,23 @@
 
 # fairing:include-cell
 import ames
-import argparse
 import fire
+import joblib
 import logging
 import nbconvert
 import os
-import joblib
+import pathlib
 import sys
 from pathlib import Path
 import pandas as pd
+import pprint
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from xgboost import XGBRegressor
 from importlib import reload
+
+# Define various constants
 
 # ## Define Train and Predict functions
 
@@ -74,11 +77,15 @@ class HousingServe(object):
         # Do any preprocessing
         prediction = self.model.predict(data=X)
         # Do any postprocessing
-        return [[prediction.item(0), prediction.item(0)]]
+        return [[prediction.item(0), prediction.item(1)]]
 
 # ## Train your Model Locally
 # 
 # * Train your model locally inside your notebook
+
+# ## Predict locally
+# 
+# * Run prediction inside the notebook using the newly created notebook
 
 # ## Use Fairing to Launch a K8s Job to train your model
 
