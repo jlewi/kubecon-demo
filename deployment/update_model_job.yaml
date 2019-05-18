@@ -10,14 +10,17 @@ spec:
     spec:
       containers:
       - command:
+        #- tail
+        #- -f 
+        #- /dev/null
         - python3 
         - update_model.py
         - all
         - --model-file=gs://test/new/model
-        - --src-dir=/src
+        - --src-dir=/home/jovyan/src
         - --remote-fork=git@github.com:kubeflow-bot/kubecon-demo.git
         - --add-github-host=true
-        image: gcr.io/code-search-demo/kubecon-demo/notebook:latest
+        image: gcr.io/code-search-demo/kubecon-demo/notebook:v20190518-2d04328-dirty-a8c2a5
         name: update
         workingDir: /src/jlewi/kubecon-demo
         env:
@@ -43,4 +46,4 @@ spec:
       # ssh key to push to github.com/kubeflow-bot
       - name: ssh
         secret:
-          secretName: ssh-key
+          secretName: kubeflow-bot-ssh-key

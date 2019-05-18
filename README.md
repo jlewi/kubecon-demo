@@ -12,7 +12,7 @@ Kubecon EU 2019 fairing, pipelines demo
 1. For the CI/CD pipeline you need to create ssh keys
 
    ```
-   kubectl create secret generic ssh-key --from-file=id_rsa= /home/jlewi/.ssh/kubeflow-bot --from-file=id_rsa.pub=/home/jlewi/.ssh/kubeflow-bot.pub 
+   kubectl create secret generic kubeflow-bot-ssh-key --from-file=id_rsa=/home/jlewi/.ssh/kubeflow-bot --from-file=id_rsa.pub=/home/jlewi/.ssh/kubeflow-bot.pub 
    ```
 
 1. Create a GITHUB_TOKEN to use with the hub CLI

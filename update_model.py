@@ -135,7 +135,7 @@ class ModelUpdater(object): # pylint: disable=useless-object-inheritance
       os.makedirs(ssh_home)
 
     os.chmod(ssh_home, 0o700)
-    for (dirpath, dirnames, filenames) in walk(ssh_dir):
+    for (dirpath, dirnames, filenames) in os.walk(ssh_dir):
       for f in filenames:
         src = os.path.join(dirpath, f)
         dest = os.path.join(ssh_home, f)
@@ -152,6 +152,16 @@ class ModelUpdater(object): # pylint: disable=useless-object-inheritance
         logging.info("Set permissions on file %s to %s", dest, mode)
         os.chmod(dest, mode)
 
+  def _add_github_hosts(self):
+    if not self._add_github_to_known_hosts:
+      return
+    logging.info("Scanning and adding github hosts")
+    output = util.run(["ssh-keyscan", "github.com"])
+
+    with open(os.path.join(pathlib.Path.home(), ".ssh", "known_hosts"),
+              mode='a') as hf:
+      hf.write(output)
+
   def all(self, model_file, src_dir, remote_fork, # pylint: disable=too-many-statements,too-many-branches
           add_github_host=False):
     """Build the latest image and update the prototype.
@@ -166,16 +176,14 @@ class ModelUpdater(object): # pylint: disable=useless-object-inheritance
     """
     self._maybe_setup_ssh()
 
+    # Ensure github.com is in the known hosts
+    self._add_github_to_known_hosts = add_github_host
+
+    self._add_github_hosts()
+
     repo = self._clone_repo(src_dir)
     self._repo = repo
     util.maybe_activate_service_account()
-
-    # Ensure github.com is in the known hosts
-    if add_github_host:
-      output = util.run(["ssh-keyscan", "github.com"])
-      with open(os.path.join(os.getenv("HOME"), ".ssh", "known_hosts"),
-                mode='a') as hf:
-        hf.write(output)
 
     if not remote_fork.startswith("git@github.com"):
       raise ValueError("Remote fork currently only supports ssh")
@@ -191,6 +199,10 @@ class ModelUpdater(object): # pylint: disable=useless-object-inheritance
     util.run(["git", "checkout", "-b", "update_model_" + now, "origin/master"],
              cwd=repo.working_dir)
 
+    # rerun the scane for known hosts
+    # Not sure why we need to rerun it but if we don't we get prompted about
+    # unverified hosts
+    self._add_github_hosts()
     deployment_file = self._update_deployment(repo.working_dir, model_file)
 
     if self._check_if_pr_exists(model_file):
@@ -268,10 +280,6 @@ class ModelUpdater(object): # pylint: disable=useless-object-inheritance
     util.run(["hub", "pull-request", "-f", "--base=" + base, "-F",
               message_file],
               cwd=self._repo.working_dir)
-
-  #def _root_dir(self):
-    #this_dir = os.path.dirname(__file__)
-    #return os.path.abspath(os.path.join(this_dir, "..", "..", "..", ".."))
 
 if __name__ == '__main__':
   logging.basicConfig(level=logging.INFO,
