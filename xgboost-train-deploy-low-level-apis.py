@@ -20,21 +20,6 @@
 # 
 # Import the libraries required to train this model.
 
-# In[1]:
-
-
-
-
-
-# In[2]:
-
-
-
-
-
-# In[3]:
-
-
 # fairing:include-cell
 import ames
 import argparse
@@ -51,40 +36,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from xgboost import XGBRegressor
 from importlib import reload
-
-
-# In[4]:
-
-
-
-
-
-# In[5]:
-
-
-
-
-
-# In[6]:
-
-
-
-
-
-# In[7]:
-
-
-
-
-
-# In[8]:
-
-
-
-
-
-# In[9]:
-
 
 # fairing:include-cell
 class HousingServe(object):    
@@ -123,16 +74,9 @@ class HousingServe(object):
         # Do any postprocessing
         return [[prediction.item(0), prediction.item(0)]]
 
-
 # ## Train your Model Locally
 # 
 # * Train your model locally inside your notebook
-
-# In[10]:
-
-
-
-
 
 # ## Use Fairing to Launch a K8s Job to train your model
 
@@ -140,83 +84,23 @@ class HousingServe(object):
 # 
 # Import the `fairing` library and configure the environment that your training or prediction job will run in.
 
-# In[11]:
-
-
-
-
-
 # ## Use fairing to build the docker image
 # 
 # * This uses the append builder to rapidly build docker images
-
-# In[12]:
-
-
-
-
-
-# In[13]:
-
-
-
-
 
 # ## Launch the K8s Job
 # 
 # * Use pod mutators to attach a PVC and credentials to the pod
 
-# In[14]:
-
-
-
-
-
-# In[15]:
-
-
-
-
-
 # ## Deploy the trained model to Kubeflow for predictions
-
-# In[17]:
-
-
-
-
-
-# In[22]:
-
-
-
-
 
 # ## Call the prediction endpoint
 # 
 # Create a test dataset, then call the endpoint on Kubeflow for predictions.
 
-# In[23]:
-
-
-
-
-
-# In[24]:
-
-
-
-
-
 # ## Clean up the prediction endpoint
 # 
 # Delete the prediction endpoint created by this notebook.
-
-# In[ ]:
-
-
-
-
 
 
 if __name__ == "__main__":

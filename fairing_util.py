@@ -19,12 +19,12 @@ class FilterIncludeCell(NbPreProcessor):
             match = self._pattern.match(line)
             if match:
                 return src
-                filtered.append(line)
         return ''
 
     def preprocess_cell(self, cell, resources, index):
         if cell['cell_type'] == 'code':
             cell['source'] = self.filter_include_cell(cell['source'])
+            
         return cell, resources   
 
 
@@ -41,7 +41,22 @@ class ConvertNotebookPreprocessorWithFire(converted_notebook.ConvertNotebookPrep
     def preprocess(self):
         exporter = nbconvert.PythonExporter()
         exporter.register_preprocessor(self.notebook_preprocessor, enabled=True)
-        contents, _ = exporter.from_filename(self.notebook_file)
+        processed, _ = exporter.from_filename(self.notebook_file)
+        
+        lines = []
+        for l in processed.splitlines():
+            # Get rid of multiple blank lines
+            if not l.strip():
+                if lines:
+                    if not lines[-1]:
+                        # last line is already blank don't add another one
+                        continue
+            # strip in statements
+            if l.startswith("# In["):
+                continue
+            lines.append(l)
+        
+        contents = "\n".join(lines)
         converted_notebook = Path(self.notebook_file).with_suffix('.py')
         with open(converted_notebook, 'w') as f:
             f.write(contents)
