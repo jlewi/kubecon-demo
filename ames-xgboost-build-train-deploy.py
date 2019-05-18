@@ -37,6 +37,8 @@ from sklearn.impute import SimpleImputer
 from xgboost import XGBRegressor
 from importlib import reload
 
+# ## Define Train and Predict functions
+
 # fairing:include-cell
 class HousingServe(object):    
     def __init__(self, model_file=None):
@@ -101,6 +103,15 @@ class HousingServe(object):
 # ## Clean up the prediction endpoint
 # 
 # Delete the prediction endpoint created by this notebook.
+
+# ## Build a pipeline
+
+# #### Define the pipeline
+# Pipeline function has to be decorated with the `@dsl.pipeline` decorator
+
+# #### Compile the pipeline
+
+# #### Submit the pipeline for execution
 
 
 if __name__ == "__main__":
