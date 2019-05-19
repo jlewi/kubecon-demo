@@ -78,6 +78,9 @@ class HousingServe(object):
         prediction = self.model.predict(data=X)
         # Do any postprocessing
         return [[prediction.item(0), prediction.item(1)]]
+    
+    def create_pr_to_update_model(self, job_spec_file, new_model):
+        ames.create_pr_to_update_model(job_spec_file, new_model)
 
 # ## Train your Model Locally
 # 
@@ -119,6 +122,12 @@ class HousingServe(object):
 # #### Compile the pipeline
 
 # #### Submit the pipeline for execution
+
+# ## Define a pipeline for CI/CD
+# 
+# * Define a pipeline that trains the model
+# * Then deploy the model and verify its working
+# * If the model is good we create a PR updating the model in the deployment
 
 
 if __name__ == "__main__":
