@@ -81,6 +81,12 @@ class HousingServe(object):
     
     def create_pr_to_update_model(self, job_spec_file, new_model):
         ames.create_pr_to_update_model(job_spec_file, new_model)
+    
+    def deploy_model(self, model_file):
+        ames.deploy_model(model_file)
+
+    def validate_model(self, endpoint):
+        ames.validate_model(endpoint)
 
 # ## Train your Model Locally
 # 
@@ -114,7 +120,7 @@ class HousingServe(object):
 # 
 # Delete the prediction endpoint created by this notebook.
 
-# ## Build a pipeline
+# ## Build a simple 1 step pipeline
 
 # #### Define the pipeline
 # Pipeline function has to be decorated with the `@dsl.pipeline` decorator

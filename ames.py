@@ -147,3 +147,13 @@ def create_pr_to_update_model(job_spec_file, model_file):
         time.sleep(10)
 
     logging.info("Final job:\n%s", pprint.pformat(latest_job))
+    
+def deploy_model(model_file):
+    # TODO(jlewi): Write actual code to deploy model; we could use fairing
+    logging.info("Deploying model %s", model_file)
+    
+def validate_model(endpoint):
+    # TODO(jlewi): Write actual code to validate the model
+    logging.info("Validating model at %s", endpoint)
+    
+    
