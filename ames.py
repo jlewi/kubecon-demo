@@ -47,6 +47,24 @@ def read_input(file_name, test_size=0.25):
 
     return (train_X, train_y), (test_X, test_y)
 
+def load_model(model_path):
+    local_model_path = model_path
+    
+    if model_path.startswith("gs://"):        
+        gcs_path = model_path
+        train_bucket_name, train_path = split_gcs_uri(gcs_path)
+
+        storage_client = storage.Client()
+        train_bucket = storage_client.get_bucket(train_bucket_name)   
+        train_blob = train_bucket.blob(train_path)
+
+        local_model_path = "/tmp/model.dat"
+        logging.info("Downloading model to %s", local_model_path) 
+        train_blob.download_to_filename(local_model_path)
+        
+    model = joblib.load(local_model_path)
+    return model
+   
 def train_model(train_X,
                 train_y,
                 test_X,

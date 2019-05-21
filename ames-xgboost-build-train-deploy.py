@@ -73,7 +73,8 @@ class HousingServe(object):
         """Predict using the model for given ndarray."""
         if not self.model:
             print("Loading model {0}".format(self.model_file))
-            self.model = joblib.load(self.model_file)
+            self.model = ames.load_model(self.model_file)
+
         # Do any preprocessing
         prediction = self.model.predict(data=X)
         # Do any postprocessing
