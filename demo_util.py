@@ -3,7 +3,7 @@ import shutil
 import subprocess
 
 KFP_PACKAGE = 'https://storage.googleapis.com/ml-pipeline/release/0.1.20/kfp.tar.gz'
-def notebook_setup():
+def notebook_setup(path_to_fairing):
     # Install some pip pckages
     # Install the SDK
     for p in ["joblib", "sklearn", "fire", "retrying"]:
@@ -17,11 +17,10 @@ def notebook_setup():
     import os
     from pathlib import Path
     import sys
-    fairing_code = os.path.join(Path.home(), "git_jlewi-kubecon-demo", "fairing")
 
-    if os.path.exists(fairing_code):    
-        logging.info("Adding %s to path", fairing_code)
-        sys.path = [fairing_code] + sys.path
+    if os.path.exists(path_to_fairing):    
+        logging.info("Adding %s to path", path_to_fairing)
+        sys.path = [path_to_fairing] + sys.path
     
     logging.basicConfig(format='%(message)s')
     logging.getLogger().setLevel(logging.INFO)
